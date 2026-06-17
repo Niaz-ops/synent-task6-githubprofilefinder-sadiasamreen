@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Profile Finder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <h1>GitHub Profile Finder</h1>
+    <p>Search any GitHub user and view their profile details.</p>
+  </header>
+
+  <main class="container">
+    <section class="search-box">
+      <input type="text" id="username" placeholder="Enter GitHub username">
+      <button id="searchBtn">Search</button>
+    </section>
+
+    <p id="loading" style="display:none;">Loading...</p>
+    <p id="error"></p>
+
+    <section id="profile" class="profile-card"></section>
+  </main>
+
+  <footer class="footer">
+    <p>Made by Sadia Samreen | Synent Task 6 | GitHub Profile Finder</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
