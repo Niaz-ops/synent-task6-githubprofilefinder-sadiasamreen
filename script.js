@@ -4,6 +4,7 @@ const profileBox = document.getElementById("profile");
 const errorBox = document.getElementById("error");
 const loading = document.getElementById("loading");
 const themeBtn = document.getElementById("themeBtn");
+const repositoriesBox = document.getElementById("repositories");
 
 searchBtn.addEventListener("click", function(){
   const username = usernameInput.value.trim();
@@ -18,20 +19,30 @@ async function searchGithubUser(username) {
 
   errorBox.innerHTML = "";
   profileBox.innerHTML = "";
+  repositoriesBox.innerHTML = "";
 
   loading.style.display = "block";
   searchBtn.disabled = true;
   searchBtn.innerText = "Searching...";
 
   try {
-
     const response = await fetch(`https://api.github.com/users/${username}`);
-
     if (!response.ok) {
       throw new Error("User not found");
-    }
-
+    }else{
+    let repos = [];
+  }
     const user = await response.json();
+    profileBox.innerHTML = `...`;
+    // Fetch repositories
+    const repoResponse = await fetch(
+   `https://api.github.com/users/${username}/repos?sort=updated&per_page=5`
+);
+    let repos = [];
+
+    if(repoResponse.ok){
+    repos = await repoResponse.json();
+  }
 
     profileBox.innerHTML = `
       <img src="${user.avatar_url}" width="120" alt="Profile Picture">
@@ -47,6 +58,27 @@ async function searchGithubUser(username) {
       <p><b>Website:</b> ${user.blog ? `<a href="${user.blog}" target="_blank" rel="noopener noreferrer">${user.blog}</a>` : "Not available"}</p>
       <a href="${user.html_url}" target="_blank" rel="noopener noreferrer">View GitHub Profile</a>`;
 
+      if(repos.length === 0){
+  repositoriesBox.innerHTML = `
+    <h2>Latest Repositories</h2>
+    <p>No public repositories available.</p>
+  `;
+}
+else{
+
+  repositoriesBox.innerHTML = `
+    <h2>Latest Repositories</h2>
+    <div class="repo-container">${repos.map(repo => `
+    <div class="repo-card"><h3>${repo.name}</h3>
+    <p>${repo.description || "No description available"}</p>
+    <p>⭐ Stars: ${repo.stargazers_count}</p>
+    <p>💻 Language: ${repo.language || "Not specified"}</p>
+    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer"> View Repository</a>
+    </div>
+`).join("")}
+  </div>
+  `;
+}
       // Clear input after successful search
       usernameInput.value = "";
   }
@@ -78,11 +110,10 @@ usernameInput.focus();
 
 themeBtn.addEventListener("click", function () {
   document.body.classList.toggle("light-theme");
-
   if(document.body.classList.contains("light-theme")){
-    themeBtn.innerHTML = "🌙 Dark Mode";
+    themeBtn.innerHTML = "🌙 Switch to Dark";
   }
   else{
-    themeBtn.innerHTML = "☀️ Light Mode";
+    themeBtn.innerHTML = "☀️ Switch to Light";
   }
 });
