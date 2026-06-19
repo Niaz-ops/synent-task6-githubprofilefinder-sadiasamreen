@@ -10,6 +10,33 @@ body {
   background: linear-gradient(135deg, #0f172a, #1e293b);
   color: white;
 }
+.light-theme {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.light-theme .profile-card {
+  background:white;
+}
+
+.light-theme .header p {
+  color:#475569;
+}
+
+#themeBtn {
+  margin-top: 20px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  background-color: #2563eb;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+#themeBtn:hover {
+  background-color: #1d4ed8;
+}
 
 .header {
   text-align: center;
@@ -136,4 +163,31 @@ body {
   .search-box button {
     width: 100%;
   }
+}
+
+.search-box button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+.search-box input:focus {
+  outline: 2px solid #38bdf8;
+}
+
+.profile-card {
+  animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.profile-card a {
+  transition: 0.3s;
 }

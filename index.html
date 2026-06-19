@@ -10,22 +10,23 @@
   <header class="header">
     <h1>GitHub Profile Finder</h1>
     <p>Search any GitHub user and view their profile details.</p>
+    <button id="themeBtn" type="button">🌙 Dark Mode</button>
   </header>
 
   <main class="container">
     <section class="search-box">
-      <input type="text" id="username" placeholder="Enter GitHub username">
-      <button id="searchBtn">Search</button>
+      <input type="text" id="username" placeholder="Enter GitHub username" aria-label="GitHub username">
+      <button id="searchBtn" type="button">Search</button>
     </section>
 
-    <p id="loading" style="display:none;">Loading...</p>
+    <div id="loading">Loading GitHub profile...</div>
     <p id="error"></p>
 
     <section id="profile" class="profile-card"></section>
   </main>
 
   <footer class="footer">
-    <p>Made by Sadia Samreen | Synent Task 6 | GitHub Profile Finder</p>
+    <p>© 2026 Sadia Samreen | Synent Technologies Task 6</p>
   </footer>
 
   <script src="script.js"></script>

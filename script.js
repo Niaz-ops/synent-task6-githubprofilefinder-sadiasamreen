@@ -3,6 +3,7 @@ const usernameInput = document.getElementById("username");
 const profileBox = document.getElementById("profile");
 const errorBox = document.getElementById("error");
 const loading = document.getElementById("loading");
+const themeBtn = document.getElementById("themeBtn");
 
 searchBtn.addEventListener("click", function(){
   const username = usernameInput.value.trim();
@@ -45,6 +46,9 @@ async function searchGithubUser(username) {
       <p><b>Public Repos:</b> <a href="${user.html_url}?tab=repositories" target="_blank">${user.public_repos}</a></p>
       <p><b>Website:</b> ${user.blog ? `<a href="${user.blog}" target="_blank" rel="noopener noreferrer">${user.blog}</a>` : "Not available"}</p>
       <a href="${user.html_url}" target="_blank" rel="noopener noreferrer">View GitHub Profile</a>`;
+
+      // Clear input after successful search
+      usernameInput.value = "";
   }
 catch (error) {
   if(error.message === "User not found"){
@@ -72,3 +76,13 @@ usernameInput.addEventListener("keydown", function(event) {
 
 usernameInput.focus();
 
+themeBtn.addEventListener("click", function () {
+  document.body.classList.toggle("light-theme");
+
+  if(document.body.classList.contains("light-theme")){
+    themeBtn.innerHTML = "🌙 Dark Mode";
+  }
+  else{
+    themeBtn.innerHTML = "☀️ Light Mode";
+  }
+});
